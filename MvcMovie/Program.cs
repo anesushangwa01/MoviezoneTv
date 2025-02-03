@@ -26,8 +26,12 @@ builder.Services.AddAuthentication(options =>
 .AddCookie() // Add cookie authentication
 .AddGoogle(options =>
 {
-   options.ClientId = builder.Configuration["Google:ClientId"];
-options.ClientSecret = builder.Configuration["Google:ClientSecret"];
+#pragma warning disable CS8601 // Possible null reference assignment.
+    options.ClientId = builder.Configuration["Google:ClientId"];
+#pragma warning restore CS8601 // Possible null reference assignment.
+#pragma warning disable CS8601 // Possible null reference assignment.
+    options.ClientSecret = builder.Configuration["Google:ClientSecret"];
+#pragma warning restore CS8601 // Possible null reference assignment.
 
 });
 

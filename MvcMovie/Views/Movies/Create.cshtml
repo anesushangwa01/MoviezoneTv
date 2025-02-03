@@ -10,6 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
+           @if (User.Identity.IsAuthenticated){
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -46,6 +47,9 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        }    else{
+            <p>Please Login to create </p> <a asp-controller="Home" asp-action="Login" class="btn btn-primary">Login with Google</a>
+        }
     </div>
 </div>
 

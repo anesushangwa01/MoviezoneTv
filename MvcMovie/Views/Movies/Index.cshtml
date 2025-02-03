@@ -37,9 +37,12 @@
                         <p class="card-text"><strong>Price:</strong> $@item.Price</p>
                         <p class="card-text"><strong>Rating:</strong> @item.Rating</p>
                         <div class="d-flex justify-content-between">
+                             @if (User.Identity.IsAuthenticated){
                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
                             <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                            }
+                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
                         </div>
                     </div>
                 </div>
