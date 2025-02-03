@@ -2,7 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Hello, <strong>@ViewBag.UserName</strong>!</p>
+        <p>Your email is: <strong>@ViewBag.UserEmail</strong>.</p>
+        <a asp-controller="Home" asp-action="Logout" class="btn btn-danger">Logout</a>
+    }
+    else
+    {
+        <p>You are not logged in.</p>
+        <a asp-controller="Home" asp-action="Login" class="btn btn-primary">Login with Google</a>
+    }
