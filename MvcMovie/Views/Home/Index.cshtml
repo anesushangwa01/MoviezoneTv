@@ -4,8 +4,8 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-        <p>Hello, <strong>@ViewBag.UserName</strong>!</p>
-        <p>Your email is: <strong>@ViewBag.UserEmail</strong>.</p>
+        <p>Hello, <strong>@ViewBag.Name</strong>!</p>
+        <p>Your email is: <strong>@ViewBag.Email</strong>.</p>
         <a asp-controller="Home" asp-action="Logout" class="btn btn-danger">Logout</a>
     }
     else

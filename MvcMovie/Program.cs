@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
 using MvcMovie.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,26 +19,16 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 // Add authentication services
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
-.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-{
-    options.LoginPath = "/Home/Login"; // Customize login path if needed
-    options.LogoutPath = "/Home/Logout"; // Customize logout path if needed
-    options.AccessDeniedPath = "/Home/AccessDenied"; // Customize access denied path if needed
-})
+.AddCookie() // Add cookie authentication
 .AddGoogle(options =>
 {
-#pragma warning disable CS8601 // Possible null reference assignment.
-    options.ClientId = builder.Configuration["Google:ClientId"];
-#pragma warning restore CS8601 // Possible null reference assignment.
-#pragma warning disable CS8601 // Possible null reference assignment.
-    options.ClientSecret = builder.Configuration["Google:ClientSecret"];
-#pragma warning restore CS8601 // Possible null reference assignment.
- options.Scope.Add("profile"); // Request profile information
-    options.Scope.Add("email");   // Request email information
-    options.SaveTokens = true; 
+   options.ClientId = builder.Configuration["Google:ClientId"];
+options.ClientSecret = builder.Configuration["Google:ClientSecret"];
+
 });
 
 // Add services to the container.
